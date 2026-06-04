@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software Quality Assurance & Verification — Complete Study Book</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1814;
+  --ink-light: #4a4640;
+  --ink-muted: #7a766e;
+  --paper: #faf8f4;
+  --paper-warm: #f5f0e8;
+  --paper-rule: #e8e2d8;
+  --accent: #8b2635;
+  --accent-light: #f0e8ea;
+  --accent-gold: #b8860b;
+  --accent-gold-light: #f5f0dc;
+  --teal: #1a5f7a;
+  --teal-light: #e8f4f8;
+  --green: #2d6a4f;
+  --green-light: #eaf4ef;
+  --purple: #4a3f7a;
+  --purple-light: #eeeaf8;
+  --note-bg: #fffbf0;
+  --note-border: #d4a017;
+  --warn-bg: #fff8f8;
+  --warn-border: #c0392b;
+  --formula-bg: #f0f4f8;
+  --formula-border: #2980b9;
+  --sidebar-w: 240px;
+  --body-max: 780px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.82;
+  color: var(--ink);
+  background: var(--paper);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+#toc {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--paper-warm);
+  border-right: 1px solid var(--paper-rule);
+  overflow-y: auto;
+  padding: 24px 0 40px;
+  z-index: 100;
+  font-family: 'Source Serif 4', serif;
+}
+#toc .toc-brand {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--paper-rule);
+  margin-bottom: 16px;
+}
+#toc .toc-brand h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  line-height: 1.4;
+}
+#toc .toc-brand p {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+  font-style: italic;
+}
+#toc ul { list-style: none; padding: 0 0 0 0; }
+#toc li { border: none; }
+#toc a.toc-chapter {
+  display: block;
+  padding: 8px 20px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: 10px;
+}
+#toc a.toc-section {
+  display: block;
+  padding: 3px 20px 3px 28px;
+  font-size: 12px;
+  color: var(--ink-light);
+  text-decoration: none;
+  line-height: 1.5;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+}
+#toc a.toc-section:hover, #toc a.toc-section.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--accent-light);
+}
+#toc .freq-pill {
+  display: inline-block;
+  font-size: 9px;
+  background: var(--accent);
+  color: white;
+  padding: 1px 5px;
+  border-radius: 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+  font-style: normal;
+}
+
+/* ── MAIN CONTENT ── */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  max-width: calc(var(--sidebar-w) + var(--body-max) + 80px);
+  padding: 0;
+}
+
+/* ── COVER ── */
+#cover {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 80px 64px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+#cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,.025) 40px,
+    rgba(255,255,255,.025) 41px
+  );
+}
+#cover .cover-tag {
+  font-family: 'Source Serif 4', serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 20px;
+  position: relative;
+}
+#cover h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--paper);
+  max-width: 600px;
+  position: relative;
+}
+#cover .cover-sub {
+  font-size: 16px;
+  color: rgba(250,248,244,.6);
+  margin-top: 16px;
+  font-style: italic;
+  position: relative;
+}
+#cover .cover-meta {
+  display: flex;
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.15);
+  font-size: 12px;
+  color: rgba(250,248,244,.5);
+  position: relative;
+  letter-spacing: .04em;
+}
+#cover .cover-meta span { font-weight: 600; color: rgba(250,248,244,.8); }
+
+/* ── CHAPTER HEADER ── */
+.chapter {
+  padding: 64px 64px 0;
+  border-top: 1px solid var(--paper-rule);
+}
+.chapter-number {
+  font-family: 'Source Serif 4', serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.chapter h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.chapter-intro {
+  font-size: 17px;
+  color: var(--ink-muted);
+  font-style: italic;
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--paper-rule);
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 36px 64px;
+}
+.section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--paper-rule);
+}
+.section h4 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 24px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.section p {
+  margin-bottom: 16px;
+  color: var(--ink-light);
+  max-width: 680px;
+}
+.section p strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── CALLOUT BOXES ── */
+.def-box {
+  background: var(--teal-light);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 22px;
+  margin: 20px 0;
+  max-width: 680px;
+}
+.def-box .def-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.def-box p { margin: 0; color: var(--ink); font-style: italic; line-height: 1.7; }
+.def-box p strong { color: var(--teal); }
+
+.exam-box {
+  background: var(--warn-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 22px;
+  margin: 20px 0;
+  max-width: 680px;
+}
+.exam-box .exam-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.exam-box p { margin: 0; color: var(--ink-light); font-size: 15px; line-height: 1.7; }
+.exam-box p strong { color: var(--ink); }
+
+.note-box {
+  background: var(--note-bg);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 22px;
+  margin: 20px 0;
+  max-width: 680px;
+}
+.note-box .note-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--accent-gold);
+  margin-bottom: 6px;
+}
+.note-box p { margin: 0; color: var(--ink-light); font-size: 15px; line-height: 1.7; }
+
+.formula-box {
+  background: var(--formula-bg);
+  border: 1px solid var(--paper-rule);
+  border-top: 3px solid var(--formula-border);
+  border-radius: 0 0 6px 6px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  max-width: 680px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink);
+}
+.formula-box .formula-label {
+  font-family: 'Source Serif 4', serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--formula-border);
+  margin-bottom: 10px;
+}
+.formula-box .f { color: var(--accent); font-weight: 500; }
+.formula-box .v { color: var(--teal); }
+.formula-box .c { color: var(--ink-muted); font-size: 12px; }
+
+.example-box {
+  background: var(--green-light);
+  border-left: 4px solid var(--green);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 22px;
+  margin: 20px 0;
+  max-width: 680px;
+}
+.example-box .ex-label {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--green); margin-bottom: 8px;
+}
+.example-box p { margin: 0 0 8px; color: var(--ink); font-size: 15px; line-height: 1.7; }
+.example-box p:last-child { margin-bottom: 0; }
+
+/* ── TABLES ── */
+.styled-table {
+  width: 100%;
+  max-width: 680px;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.styled-table th {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-family: 'Source Serif 4', serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.styled-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--paper-rule);
+  color: var(--ink-light);
+  line-height: 1.6;
+  vertical-align: top;
+}
+.styled-table tr:nth-child(even) td { background: var(--paper-warm); }
+.styled-table td strong { color: var(--ink); }
+
+/* ── LISTS ── */
+.section ul, .section ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+  max-width: 660px;
+}
+.section li {
+  color: var(--ink-light);
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+.section li strong { color: var(--ink); }
+
+/* ── DIVIDER ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--paper-rule);
+  margin: 32px 64px;
+}
+
+/* ── FREQUENCY BADGE ── */
+.freq {
+  display: inline-block;
+  font-size: 10px;
+  background: var(--accent);
+  color: white;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+  font-family: 'Source Serif 4', serif;
+  font-style: normal;
+}
+.freq-gold {
+  background: var(--accent-gold);
+}
+
+/* ── CODE ── */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--paper-warm);
+  border: 1px solid var(--paper-rule);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: #1a1814;
+  color: #e8e2d8;
+  padding: 20px 24px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 20px 0;
+  max-width: 680px;
+  line-height: 1.8;
+}
+pre .kw { color: #e06c75; }
+pre .fn { color: #61afef; }
+pre .cm { color: #5c6370; font-style: italic; }
+pre .st { color: #98c379; }
+pre .nm { color: #d19a66; }
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+  max-width: 680px;
+}
+.compare-card {
+  padding: 16px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--paper-rule);
+}
+.compare-card h5 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.compare-card ul { padding-left: 18px; margin: 0; }
+.compare-card li { font-size: 13px; margin-bottom: 5px; color: var(--ink-light); line-height: 1.5; }
+
+/* ── WORKED EXAMPLE STEPS ── */
+.steps { counter-reset: step; margin: 20px 0; max-width: 680px; }
+.step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.step-num {
+  counter-increment: step;
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-body { flex: 1; }
+.step-body strong { display: block; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+.step-body p { margin: 0; font-size: 15px; color: var(--ink-light); line-height: 1.6; }
+
+/* ── BACK TO TOP ── */
+.back-top {
+  display: inline-block;
+  margin: 16px 0;
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.back-top:hover { text-decoration: underline; }
+
+/* ── PRINT / MOBILE ── */
+@media (max-width: 900px) {
+  #toc { display: none; }
+  #main { margin-left: 0; }
+  .chapter, .section { padding-left: 24px; padding-right: 24px; }
+}
+@media print {
+  #toc { display: none; }
+  #main { margin-left: 0; }
+  .chapter, .section { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ SIDEBAR TOC ══════════════════ -->
+<nav id="toc" aria-label="Table of contents">
+  <div class="toc-brand">
+    <h2>SQAV Study Book</h2>
+    <p>Exam-optimised · 9 chapters</p>
+  </div>
+  <ul>
+    <li><a class="toc-chapter" href="#ch1">Ch 1 — Software Quality</a></li>
+    <li><a class="toc-section" href="#s1-1">1.1 What is quality?</a></li>
+    <li><a class="toc-section" href="#s1-2">1.2 Five views</a></li>
+    <li><a class="toc-section" href="#s1-3">1.3 ISO 9126</a></li>
+    <li><a class="toc-section" href="#s1-4">1.4 Quality attributes & trade-offs</a></li>
+
+    <li><a class="toc-chapter" href="#ch2">Ch 2 — QA, QC & Defects <span class="freq-pill">×5</span></a></li>
+    <li><a class="toc-section" href="#s2-1">2.1 QA vs QC</a></li>
+    <li><a class="toc-section" href="#s2-2">2.2 QA activities</a></li>
+    <li><a class="toc-section" href="#s2-3">2.3 Defect prevention</a></li>
+    <li><a class="toc-section" href="#s2-4">2.4 Defect reduction</a></li>
+    <li><a class="toc-section" href="#s2-5">2.5 Defect containment</a></li>
+    <li><a class="toc-section" href="#s2-6">2.6 George Wine case study <span class="freq-pill">×4</span></a></li>
+
+    <li><a class="toc-chapter" href="#ch3">Ch 3 — Dependability Metrics <span class="freq-pill">×4</span></a></li>
+    <li><a class="toc-section" href="#s3-1">3.1 Availability</a></li>
+    <li><a class="toc-section" href="#s3-2">3.2 ROCOF</a></li>
+    <li><a class="toc-section" href="#s3-3">3.3 POFOD</a></li>
+    <li><a class="toc-section" href="#s3-4">3.4 MTBF & MTTR</a></li>
+    <li><a class="toc-section" href="#s3-5">3.5 Worked examples</a></li>
+
+    <li><a class="toc-chapter" href="#ch4">Ch 4 — Verification & Validation</a></li>
+    <li><a class="toc-section" href="#s4-1">4.1 V&amp;V aims</a></li>
+    <li><a class="toc-section" href="#s4-2">4.2 Bugs, errors, faults, failures</a></li>
+    <li><a class="toc-section" href="#s4-3">4.3 Fuzzing & Taint Analysis</a></li>
+    <li><a class="toc-section" href="#s4-4">4.4 Formal verification vs testing</a></li>
+
+    <li><a class="toc-chapter" href="#ch5">Ch 5 — Testing Fundamentals</a></li>
+    <li><a class="toc-section" href="#s5-1">5.1 Testing definition</a></li>
+    <li><a class="toc-section" href="#s5-2">5.2 Why bugs can't be disproved</a></li>
+    <li><a class="toc-section" href="#s5-3">5.3 White box testing</a></li>
+    <li><a class="toc-section" href="#s5-4">5.4 Black box testing</a></li>
+    <li><a class="toc-section" href="#s5-5">5.5 Test case components</a></li>
+
+    <li><a class="toc-chapter" href="#ch6">Ch 6 — Test Design Techniques <span class="freq-pill">×4</span></a></li>
+    <li><a class="toc-section" href="#s6-1">6.1 Equivalence partitioning</a></li>
+    <li><a class="toc-section" href="#s6-2">6.2 Boundary value analysis</a></li>
+    <li><a class="toc-section" href="#s6-3">6.3 Cyclomatic complexity</a></li>
+    <li><a class="toc-section" href="#s6-4">6.4 Worked examples</a></li>
+
+    <li><a class="toc-chapter" href="#ch7">Ch 7 — Software Metrics <span class="freq-pill">×5</span></a></li>
+    <li><a class="toc-section" href="#s7-1">7.1 Function Points</a></li>
+    <li><a class="toc-section" href="#s7-2">7.2 Worked FP calculation</a></li>
+    <li><a class="toc-section" href="#s7-3">7.3 FFP metric</a></li>
+    <li><a class="toc-section" href="#s7-4">7.4 Halstead complexity</a></li>
+
+    <li><a class="toc-chapter" href="#ch8">Ch 8 — Configuration Management <span class="freq-pill">×4</span></a></li>
+    <li><a class="toc-section" href="#s8-1">8.1 SCM definition & benefits</a></li>
+    <li><a class="toc-section" href="#s8-2">8.2 Primary activities</a></li>
+    <li><a class="toc-section" href="#s8-3">8.3 Configuration items</a></li>
+    <li><a class="toc-section" href="#s8-4">8.4 SCMP contents</a></li>
+    <li><a class="toc-section" href="#s8-5">8.5 Participants & roles</a></li>
+    <li><a class="toc-section" href="#s8-6">8.6 Version, revision, release</a></li>
+
+    <li><a class="toc-chapter" href="#ch9">Ch 9 — Stakeholders & Applied</a></li>
+    <li><a class="toc-section" href="#s9-1">9.1 Stakeholders</a></li>
+    <li><a class="toc-section" href="#s9-2">9.2 ACMIS/MUELE roles</a></li>
+    <li><a class="toc-section" href="#s9-3">9.3 Waterfall QA phases</a></li>
+    <li><a class="toc-section" href="#s9-4">9.4 Full delivery scenario</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+<main id="main">
+
+<!-- COVER -->
+<section id="cover">
+  <div class="cover-tag">Software Quality Assurance &amp; Verification</div>
+  <h1>The Complete<br>Exam Study Book</h1>
+  <p class="cover-sub">9 chapters · Every repeated question flagged · Worked calculations included</p>
+  <div class="cover-meta">
+    <div><span>Scope</span><br>Sets 1–13, Alpha, Omega</div>
+    <div><span>Target</span><br>First Class Honours</div>
+    <div><span>Format</span><br>Concept → Definition → Example</div>
+  </div>
+</section>
+
+<!-- ══════ CHAPTER 1 ══════ -->
+<section id="ch1" class="chapter">
+  <div class="chapter-number">Chapter One</div>
+  <h2>Foundations of Software Quality</h2>
+  <p class="chapter-intro">Every topic in this course rests on what quality means and how it is measured. Master this chapter before all others — it provides the vocabulary for every exam answer you will write.</p>
+</section>
+
+<section id="s1-1" class="section">
+  <h3>1.1 What Is Software Quality?</h3>
+  <p>Software quality is deceptively difficult to define because different stakeholders experience the same software differently. An end user cares about ease of use; a developer cares about maintainability; a regulator cares about safety. No single sentence captures all of this — and that is precisely why exam questions ask for multiple perspectives.</p>
+
+  <div class="def-box">
+    <div class="def-label">Working Definition (for exam use)</div>
+    <p>Software quality is the <strong>totality of features and characteristics</strong> of a software product that bear on its ability to satisfy <strong>stated and implied needs</strong> — encompassing conformance to requirements, fitness for purpose, reliability, usability, maintainability, and the degree to which the development process is controlled and disciplined.</p>
+  </div>
+
+  <p>The phrase <em>stated and implied needs</em> is important. Stated needs are documented in requirements. Implied needs are what any reasonable user would expect even if nobody wrote them down — for example, a banking app should never expose passwords even if the specification never said so explicitly.</p>
+
+  <h4>The Two-Part IEEE Definition</h4>
+  <p>The IEEE definition has two inseparable parts:</p>
+  <ul>
+    <li><strong>Conformance to specification.</strong> Does the software do what the requirements document says? This is measurable and objective.</li>
+    <li><strong>Fitness for purpose.</strong> Even if specifications are met, does the software satisfy what the user <em>actually needed</em>? Software can fully conform to a bad specification and still be low quality.</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="exam-label">Exam Alert — Sets 11 &amp; Omega</div>
+    <p>The question reads <em>"provide what you understand by the <strong>term</strong> software quality."</em> The word "tebro" in some scanned sets is an OCR error for the word "term." Always answer by combining the IEEE definition with at least two of the five views below.</p>
+  </div>
+</section>
+
+<section id="s1-2" class="section">
+  <h3>1.2 The Five Views of Software Quality <span class="freq">×4 sets</span></h3>
+  <p>These five perspectives appear in Sets 3, 11, Omega and Set 13. Together they explain why the same software can be considered both high-quality and low-quality depending on who is looking at it.</p>
+
+  <table class="styled-table">
+    <thead><tr><th>View</th><th>Who holds it</th><th>Quality means…</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Transcendent view</strong></td><td>Philosophers, senior users</td><td>Excellence that you recognise when you see it, even if you cannot precisely define it. Quality as an absolute standard.</td></tr>
+      <tr><td><strong>User view</strong></td><td>End users, customers</td><td>Fitness for purpose. The software does what the user actually needs in their real context. A technically perfect feature nobody can use is not quality.</td></tr>
+      <tr><td><strong>Manufacturing / Process view</strong></td><td>QA engineers, managers</td><td>Conformance to a defined, controlled process. If the process is sound and followed, the product will be sound. This is the backbone of SQA.</td></tr>
+      <tr><td><strong>Product view</strong></td><td>Developers, architects</td><td>Intrinsic characteristics of the software itself — reliability, efficiency, maintainability, portability. Measured against the ISO 9126 model.</td></tr>
+      <tr><td><strong>Value-based view</strong></td><td>Business executives, clients</td><td>What a customer is willing to pay for. Quality is the trade-off between performance and price in context. A $2 app and a $200,000 hospital system are judged differently.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <div class="note-label">Memory Aid</div>
+    <p>Remember the five views as <strong>T-U-M-P-V</strong>: Transcendent, User, Manufacturing, Product, Value-based.</p>
+  </div>
+</section>
+
+<section id="s1-3" class="section">
+  <h3>1.3 ISO 9126 Quality Characteristics <span class="freq">×3 sets</span></h3>
+  <p>ISO 9126 operationalises the abstract definition of quality into six measurable characteristics. Each has sub-characteristics that can be tested and measured independently. This model is referenced in Sets 3, 13, and Omega — often tied to MUELE or ACMIS examples.</p>
+
+  <table class="styled-table">
+    <thead><tr><th>Characteristic</th><th>What it measures</th><th>Sub-characteristics</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Functionality</strong></td><td>Does it do what it is supposed to do?</td><td>Suitability, Accuracy, Interoperability, Security, Compliance</td></tr>
+      <tr><td><strong>Reliability</strong></td><td>Does it perform consistently without failure?</td><td>Maturity, Fault Tolerance, Recoverability</td></tr>
+      <tr><td><strong>Usability</strong></td><td>Is it easy to learn and use?</td><td>Understandability, Learnability, Operability, Attractiveness</td></tr>
+      <tr><td><strong>Efficiency</strong></td><td>Does it use resources well for its performance level?</td><td>Time behaviour, Resource utilisation</td></tr>
+      <tr><td><strong>Maintainability</strong></td><td>Can it be modified easily and safely?</td><td>Analysability, Changeability, Stability, Testability</td></tr>
+      <tr><td><strong>Portability</strong></td><td>Can it be transferred to different environments?</td><td>Adaptability, Installability, Conformance, Replaceability</td></tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="ex-label">MUELE Example (Set 13 / Omega)</div>
+    <p><strong>Reliability</strong> — MUELE must achieve 99.5% availability per month. The sub-characteristics at stake are: <em>Maturity</em> (how often does it fail spontaneously?), <em>Fault Tolerance</em> (does it degrade gracefully when a module fails?), and <em>Recoverability</em> (how quickly does it restore service after a crash? The MTTR target is 20 hours).</p>
+  </div>
+</section>
+
+<section id="s1-4" class="section">
+  <h3>1.4 Quality Attributes &amp; Trade-offs <span class="freq">×2 sets</span></h3>
+  <p>Software quality attributes often conflict. Improving one frequently degrades another. Set 1 asks you to identify exactly which attribute is being improved and which is being compromised in four specific scenarios.</p>
+
+  <table class="styled-table">
+    <thead><tr><th>Scenario</th><th>Attribute Improved</th><th>Attribute Compromised</th></tr></thead>
+    <tbody>
+      <tr><td>Web app caches large amounts of user data in memory to speed up response times</td><td><strong>Efficiency</strong> (time behaviour)</td><td><strong>Security</strong> (larger attack surface; user data in memory can be exposed)</td></tr>
+      <tr><td>System encrypts all stored and transmitted data to ensure confidentiality</td><td><strong>Security / Functionality</strong></td><td><strong>Efficiency</strong> (encryption adds processing overhead, slowing response times)</td></tr>
+      <tr><td>Mobile app splits into many small microservices to simplify updates</td><td><strong>Maintainability</strong></td><td><strong>Efficiency &amp; Reliability</strong> (more network calls; more failure points)</td></tr>
+      <tr><td>Safety-critical system performs extensive runtime checks before every operation</td><td><strong>Reliability / Safety</strong></td><td><strong>Efficiency</strong> (runtime checks slow down execution significantly)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 2 ══════ -->
+<section id="ch2" class="chapter">
+  <div class="chapter-number">Chapter Two</div>
+  <h2>Quality Assurance, Quality Control &amp; Defect Management <span class="freq">Most repeated topic</span></h2>
+  <p class="chapter-intro">This chapter is the single highest-frequency topic cluster in your exam sets. QA vs QC appears in Sets 2, 4, 6, 8, Alpha, Omega, and Set 13. The George Wine case appears verbatim in Sets 2, 3, 4, and 6. Know every concept here with precision.</p>
+</section>
+
+<section id="s2-1" class="section">
+  <h3>2.1 Quality Assurance versus Quality Control <span class="freq">×6 sets</span></h3>
+
+  <div class="compare-grid">
+    <div class="compare-card" style="border-top:3px solid var(--teal)">
+      <h5 style="color:var(--teal)">Quality Assurance (QA)</h5>
+      <ul>
+        <li>Process-oriented</li>
+        <li>Proactive — prevents defects</li>
+        <li>Covers the entire SDLC</li>
+        <li>Applies to how work is done</li>
+        <li>Examples: process audits, reviews, standards, training</li>
+        <li>Goal: ensure the right process is followed so defects cannot enter</li>
+      </ul>
+    </div>
+    <div class="compare-card" style="border-top:3px solid var(--accent)">
+      <h5 style="color:var(--accent)">Quality Control (QC)</h5>
+      <ul>
+        <li>Product-oriented</li>
+        <li>Reactive — finds defects</li>
+        <li>Applied to specific work products</li>
+        <li>Applies to what was produced</li>
+        <li>Examples: testing, code review, inspection</li>
+        <li>Goal: identify defects in the output so they can be fixed</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>Why QC is considered part of QA</h4>
+  <p>Even though QC and QA are not the same thing, QC is a subset of QA in the broader sense. QA encompasses all activities that contribute to quality — and QC activities (testing, inspection, reviews) are among the planned, managed activities that QA oversees. QA sets the standards and process; QC executes one specific type of activity within that process to verify the product meets those standards.</p>
+
+  <div class="def-box">
+    <div class="def-label">One-line exam answer</div>
+    <p>QA is about <strong>preventing</strong> defects through process discipline; QC is about <strong>finding</strong> defects in the product. QC is part of QA because it is one of the planned activities through which QA achieves its goals.</p>
+  </div>
+</section>
+
+<section id="s2-2" class="section">
+  <h3>2.2 Software QA Activities (Beyond Testing)</h3>
+  <p>Set 8 and Set Alpha explicitly ask for two SQA activities other than testing. The full list includes:</p>
+  <ul>
+    <li><strong>Reviews and inspections</strong> — systematic examination of documents, code, and designs by peers or experts to find defects before testing.</li>
+    <li><strong>Audits</strong> — formal evaluation of whether the project is following defined processes and standards.</li>
+    <li><strong>Configuration management</strong> — controlling changes to software artefacts to prevent unauthorised modifications and track versions.</li>
+    <li><strong>Risk management</strong> — identifying and mitigating quality risks before they become defects.</li>
+    <li><strong>Standards compliance</strong> — ensuring the project follows organisational and regulatory coding and documentation standards.</li>
+    <li><strong>Training and certification</strong> — ensuring all team members have the skills required to perform quality work.</li>
+  </ul>
+</section>
+
+<section id="s2-3" class="section">
+  <h3>2.3 Defect Prevention <span class="freq">×4 sets</span></h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Defect prevention involves identifying the causes of defects and taking action to <strong>stop them from being introduced</strong> into the software in the first place. It is entirely proactive — defect prevention happens before development produces a defect, not after.</p>
+  </div>
+
+  <h4>Two activities for defect prevention:</h4>
+  <ul>
+    <li><strong>Process improvement and standards enforcement.</strong> Defining clear coding standards, documentation requirements, and development processes — and enforcing them — removes the conditions under which defects arise. (This is exactly why George Wine is warned despite his talent: violating coding standards is a defect prevention failure.)</li>
+    <li><strong>Training and skill development.</strong> Ensuring developers, testers, and analysts have the right skills to perform their tasks correctly the first time. An undertrained developer introduces more defects regardless of effort.</li>
+  </ul>
+</section>
+
+<section id="s2-4" class="section">
+  <h3>2.4 Defect Reduction <span class="freq">×4 sets</span></h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Defect reduction involves activities that <strong>detect and remove defects</strong> that have already been introduced into the software. It is reactive relative to defect prevention but proactive relative to the customer — the goal is to find defects before the user does.</p>
+  </div>
+
+  <h4>Two activities for defect reduction:</h4>
+  <ul>
+    <li><strong>Testing (all levels — unit, integration, system).</strong> Executing the software with the explicit goal of causing it to fail, thereby revealing defects that can then be fixed.</li>
+    <li><strong>Code and design reviews / inspections.</strong> Structured peer examination of code, design documents, and requirements — statistically one of the most cost-effective defect-finding activities in software engineering.</li>
+  </ul>
+</section>
+
+<section id="s2-5" class="section">
+  <h3>2.5 Defect Containment <span class="freq">×3 sets</span></h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Defect containment involves activities that <strong>limit the impact</strong> of defects that have escaped into a delivered system. The defect exists and may be known — the goal is to prevent it from causing catastrophic failure or spreading to other parts of the system.</p>
+  </div>
+
+  <h4>Two activities for defect containment:</h4>
+  <ul>
+    <li><strong>Fault tolerance and defensive programming.</strong> Building the system to continue operating in a degraded but safe state when a component fails, rather than crashing entirely.</li>
+    <li><strong>Patch management and rapid response.</strong> Having a process to deliver fixes to users quickly once a defect in production is discovered — minimising the window of exposure.</li>
+  </ul>
+
+  <table class="styled-table">
+    <thead><tr><th>Concept</th><th>Timing</th><th>Focus</th><th>Relation to QA vs QC</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Defect Prevention</strong></td><td>Before development</td><td>The process</td><td>Pure QA</td></tr>
+      <tr><td><strong>Defect Reduction</strong></td><td>During development</td><td>The product</td><td>QC (within QA)</td></tr>
+      <tr><td><strong>Defect Containment</strong></td><td>After delivery</td><td>The impact</td><td>Operations &amp; maintenance QA</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="s2-6" class="section">
+  <h3>2.6 The George Wine / Abraham John Case Study <span class="freq">×4 sets — verbatim</span></h3>
+  <p>This is the exact same question in Sets 2, 3, 4, and 6. The names change (George Wine / George Wiss / Abraham John) but the situation is identical. The answer is always the same: <strong>yes, the chief software engineer is correct.</strong></p>
+
+  <div class="exam-box">
+    <div class="exam-label">The Scenario</div>
+    <p>An exceptional programmer produces code with very few errors, meets his schedule, and finds creative solutions — but he consistently ignores documentation requirements and team coding standards. He is warned he will be fired unless he fully complies.</p>
+  </div>
+
+  <h4>Three reasons to agree with the chief engineer:</h4>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>SQA requires process conformance, not just individual output quality.</strong>
+        <p>Software engineering is a team discipline. SQA activities — reviews, audits, configuration management — all depend on developers producing code and documentation in a standardised, predictable format. George's "original" coding style and missing documentation make peer reviews impossible, break team workflows, and undermine the entire QA process. A brilliant individual who undermines team processes is a net liability.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Non-standard documentation creates a maintainability crisis.</strong>
+        <p>Software spends far more time in maintenance than in initial development. When George leaves, changes jobs, or becomes unavailable, his undocumented, non-standard code becomes a black box that no other team member can maintain safely. The cost of this hidden technical debt vastly exceeds the short-term productivity he provides. Maintainability is an ISO 9126 quality characteristic — George's work is measurably low quality by that standard.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Defect prevention depends on documentation and standards compliance.</strong>
+        <p>Coding standards and documentation templates exist specifically to prevent defects — they encode accumulated institutional knowledge about common errors, required checks, and safe patterns. By ignoring them, George bypasses these defect prevention mechanisms. Even if his current modules have few errors, the absence of documentation means there is no systematic way to verify this, no audit trail, and no knowledge transfer. The first time someone must modify his code, the defect rate will spike.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 3 ══════ -->
+<section id="ch3" class="chapter">
+  <div class="chapter-number">Chapter Three</div>
+  <h2>Dependability Metrics &amp; Calculations <span class="freq">High-mark chapter</span></h2>
+  <p class="chapter-intro">These metrics carry 3–4 marks each and appear in Sets 1, 7, Alpha, Set 12 and Set 13. You must know every formula and be able to execute multi-step calculations cold. The MUELE scenario in Set 1 and the online delivery scenario in Sets 7 and Alpha are nearly identical in structure.</p>
+</section>
+
+<section id="s3-1" class="section">
+  <h3>3.1 Availability</h3>
+  <p>Availability measures the proportion of time a system is operational and accessible to users. It is the most commonly cited reliability metric.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Availability Formulas</div>
+    <span class="f">Availability (A)</span> = <span class="v">MTBF</span> ÷ (<span class="v">MTBF</span> + <span class="v">MTTR</span>)<br>
+    <span class="f">A</span> = <span class="v">Uptime</span> ÷ (<span class="v">Uptime</span> + <span class="v">Downtime</span>)<br>
+    <span class="f">Max Downtime</span> = Total Time × (1 − <span class="v">Target Availability</span>)<br><br>
+    <span class="c">MTBF = Mean Time Between Failures | MTTR = Mean Time To Repair</span>
+  </div>
+</section>
+
+<section id="s3-2" class="section">
+  <h3>3.2 ROCOF — Rate of Occurrence of Failures</h3>
+  <p>ROCOF measures how frequently failures occur over a unit of time. A lower ROCOF indicates a more reliable system.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">ROCOF Formulas</div>
+    <span class="f">ROCOF</span> = <span class="v">Number of failures</span> ÷ <span class="v">Observation period</span><br><br>
+    <span class="c">Units: failures/hour, failures/day, failures per 8-hr shift — match whatever the question specifies</span>
+  </div>
+</section>
+
+<section id="s3-3" class="section">
+  <h3>3.3 POFOD — Probability of Failure on Demand</h3>
+  <p>POFOD is the probability that the system will fail when a user makes a request. It is particularly important for safety-critical systems where each request is a potential point of failure.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">POFOD Formula</div>
+    <span class="f">POFOD</span> = <span class="v">Number of failures</span> ÷ <span class="v">Total number of requests</span><br><br>
+    <span class="c">Dimensionless (a probability between 0 and 1)</span>
+  </div>
+</section>
+
+<section id="s3-4" class="section">
+  <h3>3.4 MTBF and MTTR</h3>
+
+  <div class="formula-box">
+    <div class="formula-label">MTBF &amp; MTTR Formulas</div>
+    <span class="f">MTBF</span> = <span class="v">Total uptime</span> ÷ <span class="v">Number of failures</span><br>
+    <span class="f">MTTR</span> = <span class="v">Total downtime</span> ÷ <span class="v">Number of failures</span><br><br>
+    <span class="c">From ROCOF: MTBF = 1 ÷ ROCOF (when ROCOF is in failures/unit time)</span><br>
+    <span class="c">Minimum MTBF to satisfy both ROCOF and MTTR: MTBF ≥ (1/ROCOF) − MTTR</span>
+  </div>
+</section>
+
+<section id="s3-5" class="section">
+  <h3>3.5 Worked Examples</h3>
+
+  <div class="example-box">
+    <div class="ex-label">Worked Example A — MUELE (Set 1)</div>
+    <p><strong>Given:</strong> Target availability 99.5%, POFOD target 2×10⁻¹⁰, ROCOF ≤ 0.02 failures/day, MTTR = 20 hours, 4,000,000 requests, 31-day month.</p>
+    <p><strong>(a) Maximum total downtime:</strong><br>
+    Downtime = 31 days × 24 hr/day × (1 − 0.995) = 744 × 0.005 = <strong>3.72 hours</strong></p>
+    <p><strong>(b) Max failures from POFOD:</strong><br>
+    Failures = POFOD × Requests = 2×10⁻¹⁰ × 4,000,000 = <strong>0.0008 failures</strong> (effectively 0 — extremely stringent)</p>
+    <p><strong>(c) Max failures from ROCOF:</strong><br>
+    Failures = ROCOF × Days = 0.02 × 31 = <strong>0.62 failures</strong> ≈ at most 0 complete failures per month</p>
+    <p><strong>(d) Minimum MTBF:</strong><br>
+    MTBF ≥ (1/0.02) − 20 = 50 − 20 = <strong>30 hours minimum between failures</strong></p>
+    <p><strong>(e) Achieved availability with 5 failures, MTTR=18 hrs each:</strong><br>
+    Total downtime = 5 × 18 = 90 hrs | Total time = 744 hrs<br>
+    A = (744 − 90) ÷ 744 = 654 ÷ 744 = <strong>87.9% — well below the 99.5% target</strong></p>
+    <p><strong>(f) Why high availability alone does not guarantee good user experience:</strong><br>
+    A system can be technically available (online) yet slow, confusing, or producing incorrect results. User experience encompasses usability, performance, accuracy, and consistency — none of which availability alone measures.</p>
+  </div>
+
+  <div class="example-box">
+    <div class="ex-label">Worked Example B — Online Delivery Company (Sets 7 &amp; Alpha)</div>
+    <p><strong>Given:</strong> 972 requests, 64 failures (37 crashes × 2 min each, 27 wrong totals), 7 days × 24 hours = 168 hours. Targets: availability ≥ 99%, POFOD &lt; 0.1, ROCOF &lt; 2/8-hr shift.</p>
+    <p><strong>ROCOF:</strong> 64 failures ÷ 168 hours = 0.38 failures/hour = <strong>3.05 failures per 8 hours — FAILS target (&lt;2)</strong></p>
+    <p><strong>POFOD:</strong> 64 ÷ 972 = <strong>0.066 — PASSES target (&lt;0.1)</strong></p>
+    <p><strong>Availability:</strong><br>
+    Downtime = 37 crashes × 2 min = 74 min = 1.233 hours<br>
+    A = (168 − 1.233) ÷ 168 = 166.767 ÷ 168 = <strong>99.27% — PASSES target (≥99%)</strong></p>
+    <p><strong>Is it ready to ship?</strong> <em>No.</em> Although POFOD and availability targets are met, the ROCOF target is failed. 3.05 failures per 8-hour period exceeds the maximum of 2. The system fails too frequently during operation even if each individual failure is short-lived.</p>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 4 ══════ -->
+<section id="ch4" class="chapter">
+  <div class="chapter-number">Chapter Four</div>
+  <h2>Verification &amp; Validation</h2>
+  <p class="chapter-intro">V&amp;V underpins all testing and quality assurance activity. The distinction between verification and validation, and the precise meanings of bugs, errors, faults, and failures, appear in multiple sets and carry guaranteed marks.</p>
+</section>
+
+<section id="s4-1" class="section">
+  <h3>4.1 V&amp;V — Aims and Distinction</h3>
+
+  <div class="compare-grid">
+    <div class="compare-card" style="border-top:3px solid var(--teal)">
+      <h5 style="color:var(--teal)">Verification</h5>
+      <ul>
+        <li><em>"Are we building the product right?"</em></li>
+        <li>Checks the product against its specification</li>
+        <li>Can be done without running the software (static)</li>
+        <li>Reviews, inspections, walkthroughs</li>
+        <li>Detects: inconsistencies, omissions, logic errors vs spec</li>
+      </ul>
+    </div>
+    <div class="compare-card" style="border-top:3px solid var(--accent)">
+      <h5 style="color:var(--accent)">Validation</h5>
+      <ul>
+        <li><em>"Are we building the right product?"</em></li>
+        <li>Checks the product against user needs</li>
+        <li>Requires running the software (dynamic)</li>
+        <li>System testing, user acceptance testing</li>
+        <li>Detects: gaps between spec and actual user need</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>V&amp;V together aim to establish confidence that the software is both <em>correct with respect to its specification</em> and <em>fit for its intended purpose</em>. The required level of confidence depends on the criticality of the system — a safety-critical hospital system demands near-total confidence; a game tolerates much more residual risk.</p>
+
+  <h4>Three levels V&amp;V depends on (Set 9)</h4>
+  <ul>
+    <li><strong>The purpose of the software.</strong> Safety-critical systems (medical, aviation) require exhaustive V&amp;V. Non-critical commercial systems accept residual risk.</li>
+    <li><strong>User expectations.</strong> Users of novel experimental software accept more bugs than users of mature stable software.</li>
+    <li><strong>Marketing environment.</strong> Early-release products in competitive markets may ship with known minor issues to gain market share — a business trade-off on V&amp;V completeness.</li>
+  </ul>
+</section>
+
+<section id="s4-2" class="section">
+  <h3>4.2 Bugs, Errors, Faults, and Failures <span class="freq">×3 sets</span></h3>
+
+  <table class="styled-table">
+    <thead><tr><th>Term</th><th>Definition</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Error</strong></td><td>A <em>human mistake</em> — a developer's incorrect understanding, decision, or action during design or coding.</td><td>A developer misunderstands the requirement and writes subtraction instead of addition.</td></tr>
+      <tr><td><strong>Bug / Defect / Fault</strong></td><td>The <em>manifestation of an error in the code</em> — a flaw in the software artefact that, under certain conditions, will cause the system to behave incorrectly. "Bug" and "defect" are informal terms for "fault."</td><td>The line of code that performs subtraction instead of addition sitting in the source file.</td></tr>
+      <tr><td><strong>Failure</strong></td><td>An observable <em>deviation from expected behaviour</em> when the software executes — what the user actually experiences when a fault is triggered.</td><td>The user's bank account is debited instead of credited. The fault fired, causing a failure.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <div class="note-label">Key distinction — Fault vs Failure</div>
+    <p>A fault can exist in code for years without causing a failure — it only becomes a failure when the specific conditions that trigger it occur during execution. This is why testing cannot guarantee the absence of faults: you can only test the conditions you think to test.</p>
+  </div>
+
+  <h4>Defect vs Bug (Set 9 / Set Alpha)</h4>
+  <p>A <strong>defect</strong> is the formal, process-management term — it covers any deviation from requirements detected at any stage of the SDLC (in a requirements document, a design, or code). A <strong>bug</strong> is the informal term typically used by developers to mean a coding-level fault. All bugs are defects, but not all defects are bugs — a defect in a requirements document is not a bug.</p>
+</section>
+
+<section id="s4-3" class="section">
+  <h3>4.3 Fuzzing and Taint Analysis (Set 1)</h3>
+
+  <h4>Fuzzing</h4>
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Fuzzing is a dynamic verification technique that feeds a program <strong>randomly generated, malformed, or unexpected inputs</strong> at high volume and monitors for crashes, hangs, or assertion violations. The goal is to find inputs the developer never anticipated — particularly useful for finding security vulnerabilities and input validation failures.</p>
+  </div>
+
+  <h4>Taint Analysis</h4>
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Taint analysis is a dynamic verification technique that <strong>tracks the flow of untrusted ("tainted") data</strong> through a program from its entry point (user input, network data) to any point where it could cause harm (SQL query, file write, system call). If tainted data reaches a sensitive sink without being sanitised, a vulnerability is flagged.</p>
+  </div>
+</section>
+
+<section id="s4-4" class="section">
+  <h3>4.4 Formal Verification versus Testing (Set 8 / Set Alpha)</h3>
+
+  <table class="styled-table">
+    <thead><tr><th>Dimension</th><th>Formal Verification</th><th>Testing</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bugs it finds</strong></td><td>Proves properties hold for ALL possible inputs — finds bugs that testing would never encounter because no tester thought of the triggering condition.</td><td>Finds bugs in the specific cases tested. Cannot guarantee bugs don't exist in untested cases.</td></tr>
+      <tr><td><strong>Ability to prove correctness</strong></td><td>Can mathematically <em>prove</em> that a program satisfies a specification. Complete proof of correctness is theoretically possible (for finite systems).</td><td>Can only prove bugs <em>exist</em>, never that they <em>don't</em> exist. Dijkstra: "Testing shows the presence, not the absence, of bugs."</td></tr>
+      <tr><td><strong>Cost</strong></td><td>Extremely high. Requires formal mathematical training, formal specifications, and specialist tools. Scales poorly to large systems.</td><td>Much lower. Can be partially automated. Scales to large systems with practical tool support.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 5 ══════ -->
+<section id="ch5" class="chapter">
+  <div class="chapter-number">Chapter Five</div>
+  <h2>Software Testing Fundamentals</h2>
+  <p class="chapter-intro">The theoretical foundations of testing — definitions, principles, white vs black box, and test case structure. White box and black box testing appear in Sets 8, 9, and Alpha.</p>
+</section>
+
+<section id="s5-1" class="section">
+  <h3>5.1 Testing Definition (ANSI/IEEE 1059)</h3>
+  <div class="def-box">
+    <div class="def-label">ANSI/IEEE 1059 Definition</div>
+    <p>Software testing is <strong>the process of operating a system or component under specified conditions, observing or recording the results, and making an evaluation of some aspect of the system or component.</strong></p>
+  </div>
+  <p>Those who perform software testing include: developers (unit testing), dedicated testers/QA engineers, test automation engineers, users (acceptance testing), and independent test teams.</p>
+</section>
+
+<section id="s5-2" class="section">
+  <h3>5.2 Why Testing Cannot Prove the Absence of Bugs</h3>
+  <p>This is a fundamental theoretical point attributed to Edsger Dijkstra:</p>
+  <ul>
+    <li><strong>The input space is infinite (or astronomically large).</strong> Even a simple function accepting a 32-bit integer has over 4 billion possible inputs. Testing all of them is impossible in practice.</li>
+    <li><strong>State space explosion.</strong> Real programs have internal state that multiplies possible execution paths exponentially. The number of unique paths through a non-trivial program exceeds the number of atoms in the universe.</li>
+    <li><strong>Testing proves execution, not absence.</strong> A test that passes proves only that the program behaved correctly for <em>that specific input under those specific conditions</em>. A fault may exist for inputs you never tested.</li>
+  </ul>
+  <div class="note-box">
+    <div class="note-label">The quote to remember</div>
+    <p>"<em>Program testing can be used to show the presence of bugs, but never to show their absence.</em>" — Edsger W. Dijkstra</p>
+  </div>
+</section>
+
+<section id="s5-3" class="section">
+  <h3>5.3 White Box Testing <span class="freq">×4 sets</span></h3>
+  <div class="def-box">
+    <div class="def-label">What you verify in white box testing</div>
+    <p>White box testing verifies the <strong>internal structure, logic, and implementation</strong> of the software. The tester has full visibility of the source code and designs test cases to exercise specific paths, branches, conditions, and statements within the code.</p>
+  </div>
+  <h4>What white box testing covers:</h4>
+  <ul>
+    <li><strong>Statement coverage</strong> — every line of code is executed at least once.</li>
+    <li><strong>Branch coverage</strong> — every decision (if/else, switch) takes each possible branch at least once.</li>
+    <li><strong>Path coverage</strong> — every possible execution path through the code is traversed.</li>
+    <li><strong>Condition coverage</strong> — every boolean sub-expression evaluates to both true and false.</li>
+  </ul>
+  <p>White box testing is performed by developers and is most effective at the unit and integration test levels. It is the basis for cyclomatic complexity and control flow graph analysis.</p>
+</section>
+
+<section id="s5-4" class="section">
+  <h3>5.4 Black Box Testing <span class="freq">×4 sets</span></h3>
+  <div class="def-box">
+    <div class="def-label">What you verify in black box testing</div>
+    <p>Black box testing verifies the software's <strong>external behaviour</strong> against its specification, with no knowledge of internal implementation. The tester treats the system as a black box — inputs go in, outputs come out, and the tester checks whether outputs match expectations.</p>
+  </div>
+  <h4>Four categories of errors uncovered by black box testing (Set 11/Omega):</h4>
+  <ul>
+    <li><strong>Incorrect or missing functions</strong> — the software does not implement a required behaviour at all.</li>
+    <li><strong>Interface errors</strong> — the system does not correctly accept inputs or produce outputs in the expected format.</li>
+    <li><strong>Errors in data structures or external database access</strong> — data is stored, retrieved, or manipulated incorrectly.</li>
+    <li><strong>Behaviour or performance errors</strong> — the system is too slow, non-deterministic, or behaves differently under load than under normal conditions.</li>
+  </ul>
+</section>
+
+<section id="s5-5" class="section">
+  <h3>5.5 Test Case Components (Set 1)</h3>
+  <p>A well-designed test case contains three main components:</p>
+  <table class="styled-table">
+    <thead><tr><th>Component</th><th>Purpose</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Test input / preconditions</strong></td><td>Defines the exact input values, system state, and setup required before the test executes. Ensures the test is reproducible.</td><td>User is logged in; account balance is UGX 50,000; input transfer amount = UGX 20,000.</td></tr>
+      <tr><td><strong>Expected output / postconditions</strong></td><td>Specifies exactly what the system should produce or what state it should reach if the software is correct. Without this, you cannot determine pass/fail.</td><td>Account balance = UGX 30,000; confirmation message displayed; transaction log updated.</td></tr>
+      <tr><td><strong>Test procedure / execution steps</strong></td><td>The step-by-step actions a tester must follow to execute the test — ensures consistency across testers and over time.</td><td>1. Navigate to Transfer page. 2. Enter 20000 in amount field. 3. Click Transfer. 4. Check balance display and transaction log.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 6 ══════ -->
+<section id="ch6" class="chapter">
+  <div class="chapter-number">Chapter Six</div>
+  <h2>Test Design Techniques <span class="freq">High-mark chapter</span></h2>
+  <p class="chapter-intro">Equivalence partitioning, boundary value analysis, and cyclomatic complexity carry 6–14 marks per question and appear in at least 4 sets each. The Tax System and Armstrong Number questions are reproduced verbatim across Sets 7 and Alpha.</p>
+</section>
+
+<section id="s6-1" class="section">
+  <h3>6.1 Equivalence Partitioning <span class="freq">×4 sets</span></h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Equivalence partitioning divides the input domain into <strong>classes of data</strong> where all values in a class are expected to be processed identically by the software. One test case per class is sufficient — testing multiple values in the same class adds no additional coverage.</p>
+  </div>
+
+  <h4>How to identify partitions:</h4>
+  <ul>
+    <li><strong>Valid partitions</strong> — input ranges the software should accept and process correctly.</li>
+    <li><strong>Invalid partitions</strong> — input ranges the software should reject with an appropriate error message.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="ex-label">Tax System Worked Example (Sets 7 &amp; Alpha — verbatim)</div>
+    <p><strong>Specification:</strong> For a person with salary &lt; 20,000 AND who is married, tax is recalculated. If they also have &gt;2 AND &lt;5 children, an additional 10% reduction applies.</p>
+
+    <p><strong>Input variables and classes:</strong></p>
+    <p><em>Salary:</em> Valid: salary &lt; 20,000 | Invalid: salary ≥ 20,000</p>
+    <p><em>Marital status:</em> Valid: married | Invalid: not married</p>
+    <p><em>Number of children:</em><br>
+    — Class 1 (invalid lower): children ≤ 2 (no additional reduction)<br>
+    — Class 2 (valid): children = 3 or 4 (10% additional reduction applies)<br>
+    — Class 3 (invalid upper): children ≥ 5 (no additional reduction)</p>
+
+    <p><strong>Most effective class for testing children:</strong> Class 2 (3 ≤ children ≤ 4) — this is the only class that triggers the 10% reduction rule, making it the most critical to verify correctly. A single test with children = 3 or children = 4 covers this entire class.</p>
+  </div>
+</section>
+
+<section id="s6-2" class="section">
+  <h3>6.2 Boundary Value Analysis <span class="freq">×3 sets</span></h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Boundary value analysis extends equivalence partitioning by testing at and immediately adjacent to the boundaries between partitions. Faults cluster at boundaries because developers tend to use &lt; when they should use ≤, or start loops at 1 instead of 0.</p>
+  </div>
+
+  <h4>For each boundary, test these values:</h4>
+  <ul>
+    <li>The value <strong>just below</strong> the boundary (boundary − 1)</li>
+    <li>The value <strong>at</strong> the boundary exactly</li>
+    <li>The value <strong>just above</strong> the boundary (boundary + 1)</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="ex-label">Airplane Seat BVA (Sets 13 &amp; Omega)</div>
+    <p><strong>Inputs:</strong> Ticket (1001–1150), Row (1–25), Seat (1–6)</p>
+
+    <p><strong>Valid partitions:</strong> Ticket ∈ [1001,1150], Row ∈ [1,25], Seat ∈ [1,6]</p>
+    <p><strong>Invalid partitions:</strong> Ticket &lt;1001 or &gt;1150, Row &lt;1 or &gt;25, Seat &lt;1 or &gt;6</p>
+
+    <p><strong>BVA test cases for Ticket number:</strong></p>
+    <table class="styled-table" style="margin:8px 0">
+      <thead><tr><th>TC#</th><th>Ticket</th><th>Row</th><th>Seat</th><th>Expected</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1000 (below min)</td><td>5</td><td>3</td><td>Reject — invalid ticket</td></tr>
+        <tr><td>2</td><td>1001 (at min)</td><td>5</td><td>3</td><td>Accept — assign seat</td></tr>
+        <tr><td>3</td><td>1002 (above min)</td><td>5</td><td>3</td><td>Accept — assign seat</td></tr>
+        <tr><td>4</td><td>1149 (below max)</td><td>5</td><td>3</td><td>Accept — assign seat</td></tr>
+        <tr><td>5</td><td>1150 (at max)</td><td>5</td><td>3</td><td>Accept — assign seat</td></tr>
+        <tr><td>6</td><td>1151 (above max)</td><td>5</td><td>3</td><td>Reject — invalid ticket</td></tr>
+      </tbody>
+    </table>
+    <p>Repeat the same pattern for Row (boundaries: 0, 1, 2, 24, 25, 26) and Seat (boundaries: 0, 1, 2, 5, 6, 7).</p>
+  </div>
+
+  <h4>EP vs BVA — key difference</h4>
+  <p>Equivalence partitioning selects one representative value from the middle of each class. Boundary value analysis focuses specifically on the edges between classes, where off-by-one errors occur. BVA supplements EP — it does not replace it.</p>
+</section>
+
+<section id="s6-3" class="section">
+  <h3>6.3 Cyclomatic Complexity <span class="freq">×2 sets</span></h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Cyclomatic complexity (V(G)) is a quantitative measure of the number of <strong>linearly independent paths</strong> through a program's source code. It provides a lower bound on the number of test cases required for complete branch coverage.</p>
+  </div>
+
+  <h4>Three methods to calculate V(G) — all give the same answer:</h4>
+
+  <div class="formula-box">
+    <div class="formula-label">Cyclomatic Complexity Formulas</div>
+    <span class="f">Method 1 (Graph):</span>  V(G) = <span class="v">E</span> − <span class="v">N</span> + 2<br>
+    <span class="c">  E = number of edges (arrows) | N = number of nodes (boxes)</span><br><br>
+    <span class="f">Method 2 (Predicates):</span>  V(G) = <span class="v">P</span> + 1<br>
+    <span class="c">  P = number of predicate nodes (decision points: if, while, for, case)</span><br><br>
+    <span class="f">Method 3 (Regions):</span>  V(G) = number of enclosed <span class="v">regions</span> in the graph + 1<br>
+    <span class="c">  Count closed areas formed by the graph edges</span>
+  </div>
+
+  <div class="example-box">
+    <div class="ex-label">Armstrong Number — Cyclomatic Complexity (Sets 7 &amp; Alpha)</div>
+    <p>The Armstrong number code has these predicate nodes: (1) the <code>while</code> loop condition, (2) the <code>if</code> condition. So P = 2.</p>
+    <p><strong>V(G) = P + 1 = 2 + 1 = 3</strong></p>
+    <p>This means there are 3 linearly independent paths and you need a minimum of 3 test cases for full branch coverage.</p>
+    <p><strong>Basis paths:</strong><br>
+    Path 1: while condition false immediately (num = 0 — edge case)<br>
+    Path 2: while executes, sum ≠ num (not Armstrong — e.g., 123)<br>
+    Path 3: while executes, sum = num (is Armstrong — e.g., 153)</p>
+    <p><strong>Test cases:</strong><br>
+    TC1: input = 0 → "0 is not an Armstrong number" (tests false while entry)<br>
+    TC2: input = 123 → "123 is not an Armstrong number" (1³+2³+3³ = 36 ≠ 123)<br>
+    TC3: input = 153 → "153 is an Armstrong number" (1³+5³+3³ = 153)</p>
+  </div>
+</section>
+
+<section id="s6-4" class="section">
+  <h3>6.4 Grade System Worked Example (Sets 10 &amp; Alpha)</h3>
+  <div class="example-box">
+    <div class="ex-label">Worked Example — generate_grade component</div>
+    <p><strong>Spec:</strong> Exam mark 0–60, coursework 0–40. Overall = exam + c/w. Grade: ≥80=A, ≥70=B, ≥60=C, ≥50=D, &lt;50=E. Out-of-range input → FM.</p>
+    <p><strong>Valid input partitions:</strong> exam ∈ [0,60], c/w ∈ [0,40]</p>
+    <p><strong>Invalid input partitions:</strong> exam &lt;0, exam &gt;60, c/w &lt;0, c/w &gt;40</p>
+    <p><strong>Sample test cases:</strong></p>
+    <table class="styled-table" style="margin:8px 0">
+      <thead><tr><th>TC#</th><th>Exam</th><th>C/W</th><th>Overall</th><th>Expected</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>40</td><td>40</td><td>80</td><td>A</td></tr>
+        <tr><td>2</td><td>35</td><td>35</td><td>70</td><td>B</td></tr>
+        <tr><td>3</td><td>30</td><td>30</td><td>60</td><td>C</td></tr>
+        <tr><td>4</td><td>25</td><td>25</td><td>50</td><td>D</td></tr>
+        <tr><td>5</td><td>20</td><td>20</td><td>40</td><td>E</td></tr>
+        <tr><td>6</td><td>−1</td><td>20</td><td>—</td><td>FM (invalid exam)</td></tr>
+        <tr><td>7</td><td>61</td><td>20</td><td>—</td><td>FM (invalid exam)</td></tr>
+        <tr><td>8</td><td>30</td><td>−1</td><td>—</td><td>FM (invalid c/w)</td></tr>
+        <tr><td>9</td><td>30</td><td>41</td><td>—</td><td>FM (invalid c/w)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 7 ══════ -->
+<section id="ch7" class="chapter">
+  <div class="chapter-number">Chapter Seven</div>
+  <h2>Software Metrics <span class="freq">×5 sets for FP calculation</span></h2>
+  <p class="chapter-intro">Function Points is the single most repeatedly tested calculation in your entire exam set — the same numbers (55 inputs, 35 outputs, 40 inquiries, 8 files, 5 interfaces) appear in Sets 9, 13, Omega, Set 12, and Set Alpha. Know the weights table and the procedure cold.</p>
+</section>
+
+<section id="s7-1" class="section">
+  <h3>7.1 Function Points — Theory</h3>
+  <p>Function Points (FP) measure software size based on the <strong>functionality delivered to the user</strong>, independent of programming language or implementation technology. They answer: "how much does this software do?" without asking "how is it done?"</p>
+
+  <h4>The five function types:</h4>
+  <table class="styled-table">
+    <thead><tr><th>Type</th><th>Abbrev.</th><th>Description</th><th>Weights (Low/Avg/High)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>External Input</strong></td><td>EI</td><td>User inputs that add, change, or delete data (forms, transactions)</td><td>3 / 4 / 6</td></tr>
+      <tr><td><strong>External Output</strong></td><td>EO</td><td>Outputs that provide data to the user (reports, screens, messages)</td><td>4 / 5 / 7</td></tr>
+      <tr><td><strong>External Inquiry</strong></td><td>EQ</td><td>Input/output pairs — user queries a result without changing data</td><td>3 / 4 / 6</td></tr>
+      <tr><td><strong>Internal Logical File</strong></td><td>ILF</td><td>Logical groups of data maintained inside the system (master files, tables)</td><td>7 / 10 / 15</td></tr>
+      <tr><td><strong>External Interface File</strong></td><td>EIF</td><td>Data referenced from another system (external databases, files)</td><td>5 / 7 / 10</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Why use FP over LOC?</h4>
+  <ul>
+    <li><strong>Language independence.</strong> 100 lines of Java does not equal 100 lines of Python for the same functionality. FP measures what the software does, not how it does it.</li>
+    <li><strong>Early estimation.</strong> FP can be estimated from requirements before any code is written. LOC can only be counted after coding is complete.</li>
+    <li><strong>User perspective.</strong> FP measures delivered functionality, which aligns with what the customer is paying for — not implementation effort.</li>
+  </ul>
+</section>
+
+<section id="s7-2" class="section">
+  <h3>7.2 Worked Function Points Calculation <span class="freq">×5 sets — same numbers</span></h3>
+
+  <div class="exam-box">
+    <div class="exam-label">The Repeating Exam Question</div>
+    <p>55 user inputs (18 complex, rest average) | 35 user outputs (10 complex, 5 simple, rest average) | 40 inquiries (all average) | 8 files (all average) | 5 external interfaces (all average). Adjustment factors all significantly complex (value = 1.35).</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Count External Inputs (EI): 55 total</strong>
+        <p>18 complex × 6 = 108 | (55−18) = 37 average × 4 = 148 | <strong>EI total = 256</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Count External Outputs (EO): 35 total</strong>
+        <p>10 complex × 7 = 70 | 5 simple × 4 = 20 | (35−10−5) = 20 average × 5 = 100 | <strong>EO total = 190</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Count External Inquiries (EQ): 40, all average</strong>
+        <p>40 × 4 = <strong>EQ total = 160</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Count Internal Logical Files (ILF): 8, all average</strong>
+        <p>8 × 10 = <strong>ILF total = 80</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <strong>Count External Interface Files (EIF): 5, all average</strong>
+        <p>5 × 7 = <strong>EIF total = 35</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <strong>Sum Unadjusted Function Points (UFP)</strong>
+        <p>UFP = 256 + 190 + 160 + 80 + 35 = <strong>721 UFP</strong></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <strong>Apply complexity adjustment factor (CAF = 1.35 for all significantly complex)</strong>
+        <p>AFP = 721 × 1.35 = <strong>973.35 ≈ 973 Adjusted Function Points</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s7-3" class="section">
+  <h3>7.3 The FFP Metric (Sets 11, 12, Omega)</h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>FFP (Files, Flows, Processes) is a simplified sizing metric that estimates software size from three architectural counts: the number of <strong>Files</strong> (data stores), <strong>Flows</strong> (data movements), and <strong>Processes</strong> (transformations).</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">FFP Formulas</div>
+    <span class="f">Size (FFP)</span> = <span class="v">Files</span> + <span class="v">Flows</span> + <span class="v">Processes</span><br>
+    <span class="f">Cost Estimate</span> = <span class="v">Constant</span> × <span class="v">FFP Size</span><br><br>
+    <span class="c">The constant represents the organisation's cost per FFP unit (provided in the question)</span>
+  </div>
+
+  <div class="example-box">
+    <div class="ex-label">Worked Example — M.Tech developers (Sets 11 &amp; Omega)</div>
+    <p>Files = 10, Flows = 56, Processes = 101, Constant = 1031</p>
+    <p><strong>Size = 10 + 56 + 101 = 167 FFP</strong></p>
+    <p><strong>Cost = 1031 × 167 = UGX/$ 172,177</strong></p>
+  </div>
+
+  <div class="example-box">
+    <div class="ex-label">Worked Example — DELEAH Software (Set 12)</div>
+    <p>Files = 12, Flows = 48, Processes = 81, Constant = 1021</p>
+    <p><strong>Size = 12 + 48 + 81 = 141 FFP</strong></p>
+    <p><strong>Cost = 1021 × 141 = 143,961</strong></p>
+  </div>
+</section>
+
+<section id="s7-4" class="section">
+  <h3>7.4 Halstead Complexity Metrics (Set 12)</h3>
+  <p>Halstead metrics measure software complexity by counting operators and operands in source code. In the exam, you are given a Pascal or C program and asked to populate a table.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Halstead Formulas</div>
+    <span class="f">n1</span> = number of distinct operators (unique)<br>
+    <span class="f">n2</span> = number of distinct operands (unique)<br>
+    <span class="f">N1</span> = total operator occurrences<br>
+    <span class="f">N2</span> = total operand occurrences<br><br>
+    <span class="f">Program Length N</span>  = <span class="v">N1</span> + <span class="v">N2</span><br>
+    <span class="f">Vocabulary n</span>       = <span class="v">n1</span> + <span class="v">n2</span><br>
+    <span class="f">Volume V</span>           = <span class="v">N</span> × log₂(<span class="v">n</span>)<br>
+    <span class="f">Difficulty D</span>       = (<span class="v">n1</span>/2) × (<span class="v">N2</span>/<span class="v">n2</span>)<br>
+    <span class="f">Effort E</span>           = <span class="v">D</span> × <span class="v">V</span>
+  </div>
+
+  <h4>Identifying operators vs operands:</h4>
+  <ul>
+    <li><strong>Operators:</strong> Keywords (BEGIN, END, WHILE, IF, READ, WRITE), arithmetic symbols (+, −, ×, ÷), assignment (:=), punctuation that acts functionally (brackets in expressions)</li>
+    <li><strong>Operands:</strong> Variable names (Sum, Prod, a, b, c), literal values (numbers, strings)</li>
+  </ul>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 8 ══════ -->
+<section id="ch8" class="chapter">
+  <div class="chapter-number">Chapter Eight</div>
+  <h2>Software Configuration Management <span class="freq">×4 sets</span></h2>
+  <p class="chapter-intro">SCM appears as a major question in Sets 7, 8, 9, 13, Alpha, and Omega. You need the definition, the five primary activities, configuration items, SCMP contents, and the distinction between version, revision, and release.</p>
+</section>
+
+<section id="s8-1" class="section">
+  <h3>8.1 SCM — Definition &amp; Benefits</h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>Software Configuration Management (SCM) is the discipline of <strong>tracking and controlling changes</strong> to software and its related artefacts throughout the software development lifecycle — ensuring that the right version of the right item is available to the right people at the right time.</p>
+  </div>
+
+  <h4>Six benefits of SCM:</h4>
+  <ul>
+    <li><strong>Version control</strong> — maintains a complete history of all changes, allowing rollback to any prior state.</li>
+    <li><strong>Change management</strong> — ensures all changes are properly reviewed, approved, and tracked before implementation.</li>
+    <li><strong>Traceability</strong> — links every change to the requirement, defect, or decision that caused it.</li>
+    <li><strong>Concurrent development support</strong> — allows multiple developers to work on the same codebase simultaneously without overwriting each other's work.</li>
+    <li><strong>Release management</strong> — ensures only tested, approved configurations are released to production.</li>
+    <li><strong>Audit trail</strong> — provides a complete record for compliance, debugging, and organisational knowledge retention.</li>
+  </ul>
+</section>
+
+<section id="s8-2" class="section">
+  <h3>8.2 Five Primary SCM Activities</h3>
+
+  <table class="styled-table">
+    <thead><tr><th>#</th><th>Activity</th><th>What it involves</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Configuration Identification</strong></td><td>Identifying all items that will be placed under configuration control (code, requirements, designs, test plans, user manuals), naming them uniquely, and establishing their baseline versions.</td></tr>
+      <tr><td>2</td><td><strong>Configuration Control / Change Management</strong></td><td>Establishing a formal process for requesting, evaluating, approving, and implementing changes to controlled items. Prevents unauthorised changes from entering the system.</td></tr>
+      <tr><td>3</td><td><strong>Configuration Status Accounting</strong></td><td>Recording and reporting the current status of all configuration items — what version each is at, what changes are pending, what has been approved and when.</td></tr>
+      <tr><td>4</td><td><strong>Configuration Auditing</strong></td><td>Verifying that configuration items conform to their specifications and that the SCM process is being followed. Two types: functional audit (does it work as specified?) and physical audit (is the build complete and correct?).</td></tr>
+      <tr><td>5</td><td><strong>Release and Delivery Management</strong></td><td>Controlling the packaging, storage, and delivery of approved software releases to internal or external recipients — ensuring what is delivered matches what was tested and approved.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="s8-3" class="section">
+  <h3>8.3 Configuration Items</h3>
+  <p>A configuration item (CI) is any artefact placed under formal SCM control. For a results management system project, four CIs would include:</p>
+  <ul>
+    <li><strong>Source code files</strong> — all .java, .py, .sql or other code files that implement the system.</li>
+    <li><strong>Requirements specification document</strong> — the formal document defining what the system must do.</li>
+    <li><strong>Test plans and test cases</strong> — documented test procedures and expected results.</li>
+    <li><strong>Database schema and migration scripts</strong> — the definitions of all tables, relationships, and stored procedures.</li>
+    <li><em>(Others: design documents, user manuals, deployment configuration files, build scripts)</em></li>
+  </ul>
+</section>
+
+<section id="s8-4" class="section">
+  <h3>8.4 SCMP — Software Configuration Management Plan Contents</h3>
+  <p>The SCMP defines how SCM will be conducted on a specific project. Four contents it must include:</p>
+  <ul>
+    <li><strong>Introduction and scope</strong> — the project covered, the purpose of the plan, applicable standards and references.</li>
+    <li><strong>SCM activities</strong> — detailed description of how each activity (identification, control, status accounting, auditing, release) will be performed on this project.</li>
+    <li><strong>Roles and responsibilities</strong> — who the SCM manager is, what the CCB (Change Control Board) membership is, and what each participant's responsibilities are.</li>
+    <li><strong>Tools, techniques, and methods</strong> — which version control system, issue tracker, and build tools will be used and how they are configured.</li>
+    <li><em>(Others: milestone schedule, training requirements, applicable policies)</em></li>
+  </ul>
+</section>
+
+<section id="s8-5" class="section">
+  <h3>8.5 SCM Participants and Roles</h3>
+  <table class="styled-table">
+    <thead><tr><th>Participant</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><strong>SCM Manager</strong></td><td>Plans, implements, and oversees the entire SCM process. Maintains the SCMP and ensures it is followed.</td></tr>
+      <tr><td><strong>Change Control Board (CCB)</strong></td><td>Reviews and approves or rejects change requests. Comprises representatives from development, testing, management, and the customer.</td></tr>
+      <tr><td><strong>Developers</strong></td><td>Submit change requests, check in code to the repository following SCM standards, and comply with branch and merge policies.</td></tr>
+      <tr><td><strong>Software Librarian</strong></td><td>Maintains the project library — controls access to baseline items, archives approved versions, and manages distribution of controlled copies.</td></tr>
+      <tr><td><strong>Quality Assurance Engineer</strong></td><td>Audits the SCM process to ensure it is being followed, and verifies that released items match approved configurations.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Folder naming for backups (Set 7 / Alpha)</h4>
+  <p>Daily backup folders: <code>project_src_daily_YYYYMMDD</code> (e.g., <code>project_src_daily_20260527</code>)</p>
+  <p>Weekly backup folders: <code>project_src_weekly_W21_2026</code> (week number and year)</p>
+</section>
+
+<section id="s8-6" class="section">
+  <h3>8.6 Version, Revision, and Release</h3>
+
+  <table class="styled-table">
+    <thead><tr><th>Term</th><th>Definition</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Version</strong></td><td>A distinct instance of a configuration item at a specific point in time. Every change that is committed creates a new version. Versions form a history.</td><td>requirements_v1.docx, requirements_v2.docx — two different states of the same document.</td></tr>
+      <tr><td><strong>Revision</strong></td><td>A change to an existing version that corrects or improves it <em>without changing its fundamental purpose or identity</em>. A revision typically increments a minor version number.</td><td>v1.0 → v1.1 → v1.2 are revisions of version 1. A bug fix patch is a revision.</td></tr>
+      <tr><td><strong>Release</strong></td><td>A version (or set of versions) that has been formally approved, tested, and made available to users (internal or external). Not every version becomes a release — only those that pass all quality gates.</td><td>v2.0 is released to customers after passing all acceptance tests. v1.9-beta was a version but not a release.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <div class="note-label">Version vs Revision — exam distinction</div>
+    <p>A <strong>version</strong> is any snapshot of an item. A <strong>revision</strong> is a minor corrective change within the same major version. Think: v1.0 → v1.1 is a revision; v1.x → v2.0 is a new version. All revisions produce new versions, but not all new versions are revisions.</p>
+  </div>
+
+  <h4>Baseline (Sets 9, 11, Alpha)</h4>
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>A baseline is a <strong>formally reviewed and agreed-upon specification or product</strong> that serves as the basis for further development and can only be changed through formal change control procedures. Once a baseline is set, nothing in it can change without CCB approval.</p>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ══════ CHAPTER 9 ══════ -->
+<section id="ch9" class="chapter">
+  <div class="chapter-number">Chapter Nine</div>
+  <h2>Stakeholders, Roles &amp; Applied Case Studies</h2>
+  <p class="chapter-intro">Applied questions that tie together everything from previous chapters. The ACMIS student role question appears in Sets 2, 4, and 6. The MUELE and HR software project cases appear in Sets 11, 13, and Omega.</p>
+</section>
+
+<section id="s9-1" class="section">
+  <h3>9.1 Stakeholders — Definition and Types</h3>
+
+  <div class="def-box">
+    <div class="def-label">Definition</div>
+    <p>A stakeholder is any individual, group, or organisation that <strong>has an interest in, is affected by, or can affect</strong> the development, deployment, or operation of a software system. Stakeholders may have conflicting interests and priorities.</p>
+  </div>
+
+  <h4>Stakeholder expectations (two per type):</h4>
+  <table class="styled-table">
+    <thead><tr><th>Stakeholder</th><th>Expectation 1</th><th>Expectation 2</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Consumer / End user</strong></td><td>The software is easy to learn and use without extensive training (usability).</td><td>The software performs reliably and produces correct results (reliability, accuracy).</td></tr>
+      <tr><td><strong>Service / Maintenance personnel</strong></td><td>The software is well-documented and structured so faults can be diagnosed and fixed efficiently (maintainability).</td><td>Changes and patches can be applied without breaking other parts of the system (stability, testability).</td></tr>
+      <tr><td><strong>Marketing</strong></td><td>The software has features that differentiate it from competitors and can be demonstrated attractively.</td><td>The software is stable enough to demonstrate to prospects without embarrassing failures.</td></tr>
+      <tr><td><strong>Project manager</strong></td><td>The development process produces measurable quality evidence (test results, reviews) that demonstrates fitness for release.</td><td>Quality activities are completed on schedule and within budget without requiring constant rework.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="s9-2" class="section">
+  <h3>9.2 ACMIS Student Role and Expectations (Sets 2, 4, 6)</h3>
+
+  <h4>Role: End User / Consumer</h4>
+  <p>As a student, you are an end user of ACMIS. You interact with it to access academic services — you do not modify the system, administer it, or develop it.</p>
+
+  <h4>Three expectations in that role:</h4>
+  <ul>
+    <li><strong>Correct and accurate results.</strong> Course registration, examination results, and timetable information must be accurate. An incorrect result display or wrong course registration has direct academic consequences. (ISO 9126: Functionality — Accuracy)</li>
+    <li><strong>Availability and responsiveness.</strong> The system must be available during critical periods (registration deadlines, results release) and respond quickly even under high concurrent load from thousands of students. A system that is down on results day is a quality failure regardless of its technical correctness. (ISO 9126: Reliability — Availability, Efficiency — Time behaviour)</li>
+    <li><strong>Usability and clarity.</strong> Navigation must be intuitive enough that a student with no technical training can complete registration, view results, and access documents without assistance. Confusing interfaces generate errors and frustration. (ISO 9126: Usability)</li>
+  </ul>
+
+  <h4>Process that ensures expectations are met: User Acceptance Testing (UAT)</h4>
+  <p>UAT involves actual students testing the system under realistic conditions against their real-world tasks before the system goes live. Only when representative users confirm the system meets their needs is it accepted. UAT is the validation activity that bridges the gap between what developers built and what students actually need.</p>
+</section>
+
+<section id="s9-3" class="section">
+  <h3>9.3 Waterfall Phases for QA Activities (Sets 13 &amp; Omega)</h3>
+
+  <table class="styled-table">
+    <thead><tr><th>QA Activity</th><th>Waterfall Phase(s)</th><th>How it occurs</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Inspections and reviews</strong></td><td>Requirements, Design, Implementation</td><td>Requirements reviews in requirements phase; design walkthroughs in design phase; code reviews in implementation phase.</td></tr>
+      <tr><td><strong>Defect prevention</strong></td><td>Requirements, Design (planning stages)</td><td>Standards definition, training, process auditing, and risk analysis before and during early phases prevent defects from entering the product.</td></tr>
+      <tr><td><strong>Defect removal</strong></td><td>Testing &amp; Verification</td><td>Unit testing, integration testing, and system testing explicitly find and remove defects before delivery.</td></tr>
+      <tr><td><strong>Failure prevention and containment</strong></td><td>Design, Implementation, Maintenance</td><td>Fault-tolerant design in design phase; defensive programming in implementation; monitoring, patching and incident response in maintenance.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="s9-4" class="section">
+  <h3>9.4 Why Quality Is Engineered, Not Inspected In</h3>
+  <p>The HR software project case (Sets 13 &amp; Omega) asks you to agree that "quality is engineered as part of the project." The key insight is:</p>
+  <ul>
+    <li><strong>Quality cannot be added after the fact.</strong> A poorly designed system cannot be made high-quality by testing more at the end. Testing can find and remove defects, but it cannot add the reliability, maintainability, or usability that was never designed in.</li>
+    <li><strong>Training and skill development before the project starts</strong> is a defect prevention activity — the project case explicitly organises training for team members lacking skills. This is QA engineering quality into the team before code is written.</li>
+    <li><strong>Reviews and expert opinions on documentation</strong> are verification activities embedded into the workflow — not added at the end — ensuring each artefact meets standards before being used as input to the next phase.</li>
+    <li><strong>The configuration management database</strong> is an SCM activity that protects quality by controlling access to, and changes of, all project artefacts throughout development.</li>
+  </ul>
+
+  <div class="note-box">
+    <div class="note-label">Two reasons the project needs QC/QA</div>
+    <p>1. <strong>Complexity and team size</strong> — with multiple developers, reviewers, and approvers working concurrently, formal QA processes prevent inconsistency, miscommunication, and conflicting changes from degrading the product.<br>
+    2. <strong>Documentation volume and criticality</strong> — a human resource management system handles sensitive personal data; any defect in data handling, access control, or reporting can have serious legal and organisational consequences. QC activities (reviews, testing) are required to ensure correctness before deployment.</p>
+  </div>
+
+  <a href="#cover" class="back-top">↑ Back to top</a>
+</section>
+
+<div style="height:80px"></div>
+</main>
+
+<script>
+const sections = document.querySelectorAll('.section, .chapter');
+const links = document.querySelectorAll('#toc a.toc-section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => { if (s.id) observer.observe(s); });
+</script>
+</body>
+</html>
