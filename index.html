@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mukian Lampz Find the right light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><circle cx='24' cy='24' r='20' fill='none' stroke='%23e89b1c' stroke-width='5'/><line x1='13' y1='24' x2='20' y2='24' stroke='%23e89b1c' stroke-width='5' stroke-linecap='round'/><line x1='28' y1='24' x2='35' y2='24' stroke='%23e89b1c' stroke-width='5' stroke-linecap='round'/></svg>">
+</head>
+<body data-page="landing">
+
+  <main class="stage" id="stage">
+    <div class="stage__rays"></div>
+    <div class="stage__grain"></div>
+    <h2 class="ghost" id="ghost" aria-hidden="true">LIGHT</h2>
+    <div class="spot" id="spot"></div>
+    <div class="pool" id="pool"></div>
+
+    <nav class="lnav">
+      <a class="lnav__brand" href="index.html" aria-label="Mukian Lampz">
+        <svg class="logo-mark" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><line x1="13" y1="24" x2="20" y2="24"/><line x1="28" y1="24" x2="35" y2="24"/></svg>
+        MUKIAN LAMPZ
+      </a>
+      <div class="lnav__right">
+        <a class="lnav__link" href="home.html">Enter</a>
+        <a class="lnav__link" href="home.html">Login</a>
+        <a class="lnav__link" href="home.html">Sign up</a>
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" stroke-linecap="round"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 109.8 9.8z"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div class="hero" id="hero">
+      <div class="hero__eyebrow reveal">MUKIAN LAMPZ · KAMPALA</div>
+      <h1 class="hero__title">
+        <span class="hero__idx">09</span>
+        <span class="split">RIGHT</span>
+        <span class="w-light split">LIGHT</span>
+      </h1>
+      <p class="hero__sub reveal" data-d="1">Modern lighting that turns any room into the right mood. Move your cursor watch the light follow.</p>
+      <div class="hero__cta reveal" data-d="2">
+        <a class="btn btn--green" href="shop.html">Order now</a>
+        <a class="btn btn--ghost" href="home.html">Enter store →</a>
+      </div>
+      <div class="hero__chips reveal" data-d="3">
+        <span>Chandeliers</span><span>Lamps</span><span>Lampshades</span>
+      </div>
+    </div>
+
+    <div class="lamp-stage" id="lampStage">
+      <div class="lamp">
+        <div class="lamp__beam" id="beam"></div>
+        <img class="lamp__layer lamp__stem" src="assets/hero/lamp_stem.png" alt="">
+        <img class="lamp__layer lamp__head" id="lampHead" src="assets/hero/lamp_head.png" alt="Modern desk lamp">
+        <div class="lamp__glow"></div>
+      </div>
+    </div>
+
+    <div class="cue reveal" data-d="3">move your cursor</div>
+    <div class="vlabel">Illuminate every moment</div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

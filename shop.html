@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mukian Lampz Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><circle cx='24' cy='24' r='20' fill='none' stroke='%23e89b1c' stroke-width='5'/><line x1='13' y1='24' x2='20' y2='24' stroke='%23e89b1c' stroke-width='5' stroke-linecap='round'/><line x1='28' y1='24' x2='35' y2='24' stroke='%23e89b1c' stroke-width='5' stroke-linecap='round'/></svg>">
+</head>
+<body data-page="shop">
+
+  <nav class="nav nav--inner">
+    <a class="nav__brand" href="index.html" aria-label="Home">
+      <svg class="logo-mark" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><line x1="13" y1="24" x2="20" y2="24"/><line x1="28" y1="24" x2="35" y2="24"/></svg>
+    </a>
+    <div class="nav__links">
+      <a href="home.html">HOME</a>
+      <a href="shop.html" class="is-active">SHOP</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT-US</a>
+    </div>
+    <div class="nav__right">
+      <a class="icon-btn cart-link" href="#cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6L5 3H2"/></svg>
+        <span class="cart-count" data-cart-count style="display:none">0</span>
+      </a>
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" stroke-linecap="round"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 109.8 9.8z"/></svg>
+      </button>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="drawer">
+    <a href="home.html">HOME</a>
+    <a href="shop.html" class="is-active">SHOP</a>
+    <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT-US</a>
+  </div>
+
+  <main class="snap soft">
+
+    <!-- SHOP 1 catalog -->
+    <section class="panel shop1">
+      <canvas id="fx"></canvas>
+      <div class="shop1__veil"></div>
+      <div class="shop1__head">
+        <h1 class="split">Modern elegance,<br>made affordable.</h1>
+        <p class="sub reveal" data-d="1">Complete your order and bring your vision to light.</p>
+        <div class="search reveal" data-d="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg>
+          <input id="search" type="search" placeholder="Search product" aria-label="Search products">
+        </div>
+        <div class="cats reveal" data-d="2">
+          <button class="cat is-on" data-cat="all">All</button>
+          <button class="cat" data-cat="chandeliers">Chandeliers</button>
+          <button class="cat" data-cat="lamps">Lamps</button>
+          <button class="cat" data-cat="lampshades">Lampshades</button>
+          <button class="cat" data-cat="favorites">Favorites</button>
+          <button class="cat" data-cat="recents">Recents</button>
+          <button class="cat" id="clear-history" style="background:transparent;border:1px solid var(--line);color:var(--ink-soft)">Clear history</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- SHOP 2 cart -->
+    <section class="panel shop2" id="cart">
+      <canvas id="fx2" hidden></canvas>
+      <div class="cart-head">
+        <span class="cart-pill">CART <b data-cart-pill-count>0</b></span>
+      </div>
+      <div class="cart-row" id="cart-row"></div>
+      <div class="cart-bottom">
+        <div class="cart-list">
+          Orders …… <span id="orders-n">0</span>
+          <div class="review-box">
+            <div class="lbl">Review and comment</div>
+            <div class="stars" data-key="ml_review"></div>
+            <textarea placeholder="Share a thought about your picks…"></textarea>
+          </div>
+        </div>
+        <div class="pay">
+          <div class="pay__total" id="cart-total">0 UGx</div>
+          <button class="pay__btn" id="purchase">
+            Purchase
+            <svg viewBox="0 0 24 24" width="24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18" /><rect x="15" y="12" width="4" height="3" rx="1" fill="#fff"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="cart-tagline reveal">Where style meets comfort. Review your selections and create a home you'll love.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="foot">
+      <div class="foot__panel">
+        <h2 class="reveal">Lighting Crafted for Living</h2>
+        <p class="reveal" data-d="1">Hand-selected designs that blend warmth, elegance, and function curated to transform every corner of your space.</p>
+        <a class="explore reveal" data-d="2" href="#" data-totop>
+          <span>EXPLORE</span>
+          <span class="arrow"><svg viewBox="0 0 24 24" width="22" fill="none" stroke="#fff" stroke-width="2.4"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <button class="to-top" aria-label="Back to top"><svg viewBox="0 0 24 24" width="22" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="foot__meta">
+        Turning possibilities into results.<br>Simple. Modern. Effective.<br>Thank you for visiting our website.<br>© 2026 All Rights Reserved.
+      </div>
+    </footer>
+
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
