@@ -180,7 +180,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   grid-template-columns:1.05fr .95fr;align-items:center;
   padding:120px clamp(20px,5vw,70px) 60px}
 .hero-copy{position:relative}
-.hero-index{font-family:var(--font-body);font-weight:700;color:#cfd6e6;font-size:22px;
+.hero-index{font-family:var(--font-body);font-weight:700;color:#cfd6e6;font-size:25px;padding: 4rem;
   position:absolute;left:6px;top:46%}
 .hero-word{font-family:var(--font-impact);line-height:.82;color:#fff;
   font-size:clamp(72px,15vw,200px);letter-spacing:.01em;text-shadow:0 10px 40px rgba(0,0,0,.4)}
@@ -204,7 +204,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .landing:hover .lamp__beam{opacity:1}
 
 /* text load-in + hover (shared with home) — replays via .is-in */
-.split .char{display:inline-block;opacity:0;transform:translateY(.55em) rotateX(38deg);will-change:transform,opacity}
+.split .char{display:inline-block;opacity:0;transform:translateY(.60em) rotateX(38deg);will-change:transform,opacity}
 .split.is-in .char{animation:charIn .6s var(--ease) forwards}
 .split .char[data-space]{width:.3em}
 @keyframes charIn{to{opacity:1;transform:none}}
